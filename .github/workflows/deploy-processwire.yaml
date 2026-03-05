@@ -46,6 +46,7 @@ on:
 
 jobs:
   rm-deploy:
+    # ubuntu-latest image includes PHP and Composer
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -60,6 +61,14 @@ jobs:
         with:
           token: ${{ secrets.CI_TOKEN }}
           submodules: true
+
+      - name: 📦 Install dependencies
+        run: |
+          composer install \
+            --no-dev \
+            --no-interaction \
+            --prefer-dist \
+            --optimize-autoloader
 
       - name: 📋 List files in the repository
         run: ls ${{ github.workspace }}
