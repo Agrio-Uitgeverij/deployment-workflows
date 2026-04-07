@@ -51,13 +51,13 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ !inputs.SUBMODULES }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: false
 
       - name: Checkout with Submodules
         if: ${{ inputs.SUBMODULES }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.CI_TOKEN }}
           submodules: true
