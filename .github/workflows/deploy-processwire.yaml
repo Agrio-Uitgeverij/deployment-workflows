@@ -89,6 +89,7 @@ jobs:
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
 
           echo "DEPLOY_FOLDER=$PATH/tmp-$DEPLOY_NAME" >> $GITHUB_ENV
+          echo "DEPLOY_FOLDER_NOTMP=$PATH/$DEPLOY_NAME" >> $GITHUB_ENV
           echo "SRC=${{ github.workspace }}" >> $GITHUB_ENV
 
           echo "BRANCH: $BRANCH"
@@ -122,3 +123,4 @@ jobs:
       - name: 🌟 Trigger RockMigrations Deployment
         run: |
           ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER }}/site/modules/RockMigrations/deploy.php ${{ env.BRANCH }}"
+          ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/cleandb.php ${{ env.BRANCH }}"
