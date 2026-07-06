@@ -123,4 +123,4 @@ jobs:
       - name: 🌟 Trigger RockMigrations Deployment
         run: |
           ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER }}/site/modules/RockMigrations/deploy.php ${{ env.BRANCH }}"
-          ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/cleandb.php ${{ env.BRANCH }}"
+          ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/deploy.post.php ${{ env.BRANCH }}"
