@@ -121,7 +121,7 @@ jobs:
           echo "PHP Command: $PHP_COMMAND"
 
       - name: 🥚 Agrio Pre-Deployment Steps
-        run: ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/deploy.pre.php ${{ env.BRANCH }}"
+        run: ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER }}/site/deploy.pre.php ${{ env.BRANCH }}"
 
       - name: 🌟 Trigger RockMigrations Deployment
         run: |
