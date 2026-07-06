@@ -120,7 +120,14 @@ jobs:
           echo "PHP_COMMAND=$PHP_COMMAND" >> $GITHUB_ENV
           echo "PHP Command: $PHP_COMMAND"
 
+      - name: 🥚 Agrio Pre-Deployment Steps
+        run: ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/deploy.pre.php ${{ env.BRANCH }}"
+
       - name: 🌟 Trigger RockMigrations Deployment
         run: |
           ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER }}/site/modules/RockMigrations/deploy.php ${{ env.BRANCH }}"
+
+      - name: 🐣 Agrio Post-Deployment Steps
+        run: |
+          ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/deploy.clean.php ${{ env.BRANCH }}"
           ssh ${{ inputs.SSH_USER }}@${{ inputs.SSH_HOST }} -p${{ inputs.SSH_PORT }} "$PHP_COMMAND ${{ env.DEPLOY_FOLDER_NOTMP }}/site/deploy.post.php ${{ env.BRANCH }}"
